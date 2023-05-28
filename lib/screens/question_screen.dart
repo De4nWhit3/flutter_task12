@@ -21,7 +21,7 @@ class QuestionScreen extends StatelessWidget {
     );
     questions.add(
       Question(
-          questionText: 'How many fingers does Micky Mouse have?',
+          questionText: 'How many fingers does Mickey Mouse have?',
           answers: [
             Answer(answer: 'Five', isCorrect: false),
             Answer(answer: 'Four', isCorrect: true),
@@ -85,6 +85,7 @@ class QuestionScreen extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
+              const SubmitButtonWidget(),
             ],
           ),
         ),
@@ -98,7 +99,65 @@ class TextQuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Column(
+      children: [
+        TextField(
+          decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                width: 2,
+                color: Colors.black,
+              )),
+              hintText: 'Enter your answer'),
+        ),
+      ],
+    );
+  }
+}
+
+class SubmitButtonWidget extends StatelessWidget {
+  const SubmitButtonWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(30),
+          ),
+          border: Border.all(
+            color: Colors.black,
+            width: 2,
+          )),
+      child: Material(
+        clipBehavior: Clip.antiAlias,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(30),
+        ),
+        child: Ink(
+          height: 50,
+          width: 150,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+              colors: [
+                Colors.orange.shade400,
+                Colors.orange.shade900,
+              ],
+            ),
+          ),
+          child: InkWell(
+            splashColor: Colors.orangeAccent,
+            onTap: () {},
+            child: const Center(child: Text('Submit')),
+            // customBorder: const CircleBorder(),
+          ),
+        ),
+      ),
+    );
   }
 }
 
