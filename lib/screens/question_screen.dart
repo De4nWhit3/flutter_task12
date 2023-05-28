@@ -91,8 +91,8 @@ class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
       children: [
         // TODO: use list.generate or .map to generate the radios
         RadioListTile<String>(
-          title: Text('Option1 text'),
-          value: 'option1',
+          title: Text(widget.answers[0].answer),
+          value: widget.answers[0].answer,
           groupValue: _value,
           onChanged: (String? value) {
             setState(() {
@@ -101,8 +101,8 @@ class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
           },
         ),
         RadioListTile<String>(
-          title: const Text('Option2 text'),
-          value: 'option2',
+          title: Text(widget.answers[1].answer),
+          value: widget.answers[1].answer,
           groupValue: _value,
           onChanged: (String? value) {
             setState(() {
@@ -111,8 +111,8 @@ class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
           },
         ),
         RadioListTile<String>(
-          title: const Text('Option3 text'),
-          value: 'option3',
+          title: Text(widget.answers[2].answer),
+          value: widget.answers[2].answer,
           groupValue: _value,
           onChanged: (String? value) {
             setState(() {
