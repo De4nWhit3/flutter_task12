@@ -32,6 +32,18 @@ class QuestionScreen extends StatelessWidget {
           type: 'radio',
           hint: 'Select one of the above answers by clicking on the radios.'),
     );
+    questions.add(
+      Question(
+          questionText:
+              'Unscramble the following letters into a word: APPEIPLNE',
+          answers: [
+            Answer(answer: 'PINEAPPLE', isCorrect: true),
+          ],
+          category: 'food',
+          imgURL: 'assets/fruits.jpg',
+          type: 'text',
+          hint: 'It is a yellow fruit.'),
+    );
   }
 
   @override
@@ -51,6 +63,13 @@ class QuestionScreen extends StatelessWidget {
           child: Column(
             children: [
               // TODO: Loop over questions and generate the correct widget based on question type. eg, radio, date, or text
+              QuestionWidgetContainer(
+                question: questions[2],
+                questionWidget: const TextQuestionWidget(),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
               QuestionWidgetContainer(
                 question: questions[0],
                 questionWidget: const DateQuestionWidget(),
@@ -74,9 +93,18 @@ class QuestionScreen extends StatelessWidget {
   }
 }
 
+class TextQuestionWidget extends StatelessWidget {
+  const TextQuestionWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
 class RadioQuestionWidget extends StatefulWidget {
-  List<Answer> answers;
-  RadioQuestionWidget({super.key, required this.answers});
+  final List<Answer> answers;
+  const RadioQuestionWidget({super.key, required this.answers});
 
   @override
   State<RadioQuestionWidget> createState() => _RadioQuestionWidgetState();
