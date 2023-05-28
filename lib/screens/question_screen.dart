@@ -65,9 +65,44 @@ class RadioQuestionWidget extends StatefulWidget {
 }
 
 class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
+  String? _value;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      children: [
+        // TODO: use list.generate or .map to generate the radios
+        RadioListTile<String>(
+          title: const Text('Option1 text'),
+          value: 'option1',
+          groupValue: _value,
+          onChanged: (String? value) {
+            setState(() {
+              _value = value;
+            });
+          },
+        ),
+        RadioListTile<String>(
+          title: const Text('Option2 text'),
+          value: 'option2',
+          groupValue: _value,
+          onChanged: (String? value) {
+            setState(() {
+              _value = value;
+            });
+          },
+        ),
+        RadioListTile<String>(
+          title: const Text('Option3 text'),
+          value: 'option3',
+          groupValue: _value,
+          onChanged: (String? value) {
+            setState(() {
+              _value = value;
+            });
+          },
+        ),
+      ],
+    );
   }
 }
 
