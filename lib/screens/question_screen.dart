@@ -29,24 +29,57 @@ class QuestionScreen extends StatelessWidget {
       backgroundColor: Colors.orange.shade300,
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(
-          top: 10,
-          bottom: 10,
+          top: 20,
+          bottom: 20,
         ),
         child: Center(
-          child: DateQuestionWidget(question: questions[0]),
+          child: Column(
+            children: [
+              QuestionWidgetContainer(
+                question: questions[0],
+                questionWidget: const DateQuestionWidget(),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              QuestionWidgetContainer(
+                question: questions[0],
+                questionWidget: const RadioQuestionWidget(),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class DateQuestionWidget extends StatelessWidget {
-  const DateQuestionWidget({
+class RadioQuestionWidget extends StatefulWidget {
+  const RadioQuestionWidget({super.key});
+
+  @override
+  State<RadioQuestionWidget> createState() => _RadioQuestionWidgetState();
+}
+
+class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class QuestionWidgetContainer extends StatelessWidget {
+  const QuestionWidgetContainer({
     super.key,
     required this.question,
+    required this.questionWidget,
   });
 
   final Question question;
+  final Widget questionWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -95,23 +128,7 @@ class DateQuestionWidget extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Builder(
-                builder: (context) => FloatingActionButton(
-                  foregroundColor: Colors.orange.shade50,
-                  backgroundColor: Colors.orange.shade400,
-                  child: const Icon(Icons.date_range),
-                  onPressed: () => showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now().subtract(
-                      const Duration(days: 365),
-                    ),
-                    lastDate: DateTime.now().add(
-                      const Duration(days: 365),
-                    ),
-                  ),
-                ),
-              ),
+              questionWidget,
               const SizedBox(
                 height: 10,
               ),
@@ -123,6 +140,33 @@ class DateQuestionWidget extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class DateQuestionWidget extends StatelessWidget {
+  const DateQuestionWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (context) => FloatingActionButton(
+        foregroundColor: Colors.orange.shade50,
+        backgroundColor: Colors.orange.shade400,
+        child: const Icon(Icons.date_range),
+        onPressed: () => showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now().subtract(
+            const Duration(days: 365),
+          ),
+          lastDate: DateTime.now().add(
+            const Duration(days: 365),
+          ),
+        ),
+      ),
     );
   }
 }
