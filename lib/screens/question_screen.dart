@@ -44,6 +44,21 @@ class QuestionScreen extends StatelessWidget {
           type: 'text',
           hint: 'It is a yellow fruit.'),
     );
+    questions.add(
+      Question(
+          questionText: 'Which of the following ingredients go into a cake?',
+          answers: [
+            Answer(answer: 'eggs', isCorrect: true),
+            Answer(answer: 'flour', isCorrect: true),
+            Answer(answer: 'hand lotion', isCorrect: false),
+            Answer(answer: 'milk', isCorrect: true),
+          ],
+          category: 'food',
+          imgURL: 'assets/cake.jpg',
+          type: 'switch',
+          hint:
+              'Toggle the switches to indicate which ingredients are correct.'),
+    );
   }
 
   @override
@@ -62,14 +77,14 @@ class QuestionScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              // TODO: Loop over questions and generate the correct widget based on question type. eg, radio, date, or text
               QuestionWidgetContainer(
-                question: questions[2],
-                questionWidget: const TextQuestionWidget(),
+                question: questions[3],
+                questionWidget: const SwitchQuestionWidget(),
               ),
               const SizedBox(
                 height: 30,
               ),
+              // TODO: Loop over questions and generate the correct widget based on question type. eg, radio, date, or text
               QuestionWidgetContainer(
                 question: questions[0],
                 questionWidget: const DateQuestionWidget(),
@@ -85,12 +100,33 @@ class QuestionScreen extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
+              QuestionWidgetContainer(
+                question: questions[2],
+                questionWidget: const TextQuestionWidget(),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
               const SubmitButtonWidget(),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class SwitchQuestionWidget extends StatefulWidget {
+  const SwitchQuestionWidget({super.key});
+
+  @override
+  State<SwitchQuestionWidget> createState() => _SwitchQuestionWidgetState();
+}
+
+class _SwitchQuestionWidgetState extends State<SwitchQuestionWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
