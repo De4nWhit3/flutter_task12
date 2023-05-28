@@ -11,11 +11,26 @@ class QuestionScreen extends StatelessWidget {
     questions.add(
       Question(
           questionText: 'On what day is family day?',
-          answers: [Answer(answer: 'SomeDate', isCorrect: true)],
+          answers: [
+            Answer(answer: 'SomeDate', isCorrect: true),
+          ],
           category: 'Public Holidays',
           imgURL: 'assets/family.jpg',
           type: 'date',
           hint: 'Use the date picker above to select your answer.'),
+    );
+    questions.add(
+      Question(
+          questionText: 'How many fingers does Micky Mouse have?',
+          answers: [
+            Answer(answer: 'Five', isCorrect: false),
+            Answer(answer: 'Four', isCorrect: true),
+            Answer(answer: 'Six', isCorrect: false),
+          ],
+          category: 'characters',
+          imgURL: 'assets/mickey.jpg',
+          type: 'radio',
+          hint: 'Select one of the above answers by clicking on the radios.'),
     );
   }
 
@@ -35,6 +50,7 @@ class QuestionScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
+              // TODO: Loop over questions and generate the correct widget based on question type. eg, radio, date, or text
               QuestionWidgetContainer(
                 question: questions[0],
                 questionWidget: const DateQuestionWidget(),
@@ -43,8 +59,9 @@ class QuestionScreen extends StatelessWidget {
                 height: 30,
               ),
               QuestionWidgetContainer(
-                question: questions[0],
-                questionWidget: const RadioQuestionWidget(),
+                question: questions[1],
+                questionWidget:
+                    RadioQuestionWidget(answers: questions[1].answers),
               ),
               const SizedBox(
                 height: 30,
@@ -58,7 +75,8 @@ class QuestionScreen extends StatelessWidget {
 }
 
 class RadioQuestionWidget extends StatefulWidget {
-  const RadioQuestionWidget({super.key});
+  List<Answer> answers;
+  RadioQuestionWidget({super.key, required this.answers});
 
   @override
   State<RadioQuestionWidget> createState() => _RadioQuestionWidgetState();
@@ -66,13 +84,14 @@ class RadioQuestionWidget extends StatefulWidget {
 
 class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
   String? _value;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         // TODO: use list.generate or .map to generate the radios
         RadioListTile<String>(
-          title: const Text('Option1 text'),
+          title: Text('Option1 text'),
           value: 'option1',
           groupValue: _value,
           onChanged: (String? value) {
