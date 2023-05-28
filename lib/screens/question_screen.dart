@@ -79,7 +79,8 @@ class QuestionScreen extends StatelessWidget {
             children: [
               QuestionWidgetContainer(
                 question: questions[3],
-                questionWidget: const SwitchQuestionWidget(),
+                questionWidget:
+                    SwitchQuestionWidgetWrapper(answers: questions[3].answers),
               ),
               const SizedBox(
                 height: 30,
@@ -116,17 +117,47 @@ class QuestionScreen extends StatelessWidget {
   }
 }
 
+class SwitchQuestionWidgetWrapper extends StatelessWidget {
+  const SwitchQuestionWidgetWrapper({super.key, required this.answers});
+  final List<Answer> answers;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SwitchQuestionWidget(answer: answers[0]),
+        SwitchQuestionWidget(answer: answers[1]),
+        SwitchQuestionWidget(answer: answers[2]),
+        SwitchQuestionWidget(answer: answers[3]),
+      ],
+    );
+  }
+}
+
 class SwitchQuestionWidget extends StatefulWidget {
-  const SwitchQuestionWidget({super.key});
+  const SwitchQuestionWidget({super.key, required this.answer});
+  final Answer answer;
 
   @override
   State<SwitchQuestionWidget> createState() => _SwitchQuestionWidgetState();
 }
 
 class _SwitchQuestionWidgetState extends State<SwitchQuestionWidget> {
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Text(widget.answer.answer),
+      Switch(
+        value: selected,
+        activeColor: Colors.yellow,
+        onChanged: (bool value) {
+          setState(() {
+            selected = value;
+          });
+        },
+      ),
+    ]);
   }
 }
 
