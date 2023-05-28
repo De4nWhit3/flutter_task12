@@ -1,20 +1,23 @@
+import 'answer.dart';
+
 class Question {
   final String questionText;
-  final String correctAnswer;
+  final List<Answer> answers;
   final String category;
   final String imgURL;
+  final String type; // radio, date, text, or switch
 
   Question({
     required this.questionText,
-    required this.correctAnswer,
+    required this.answers,
     required this.category,
     required this.imgURL,
+    required this.type,
   });
 
-  (String, String, String, String) getQuestionInfo() {
+  (String, String, String) getQuestionInfo() {
     return (
       questionText,
-      correctAnswer,
       category,
       imgURL,
     );
