@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({
+class QuestionScreen extends StatelessWidget {
+  const QuestionScreen({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Questions')),
       body: Container(
         color: Colors.red,
         child: DatePickerDialog(
