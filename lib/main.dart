@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
 
     switch (currentScreen) {
       case (Screens.questionScreen):
-        return const QuestionScreen();
+        return QuestionScreen();
       default:
         return const Placeholder();
     }
