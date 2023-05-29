@@ -65,6 +65,56 @@ class QuestionScreen extends StatelessWidget {
           hint:
               'Toggle the switches to indicate which ingredients are correct.'),
     );
+    questions.add(
+      Question(
+          questionText: 'On which day is the Polo World Championship?',
+          answers: [
+            Answer(answer: 'SomeDate', isCorrect: true),
+          ],
+          category: 'sports',
+          imgURL: 'assets/horse.jpeg',
+          type: 'date',
+          hint: 'It takes place on a Saturday in May.'),
+    );
+    questions.add(
+      Question(
+          questionText: 'Who is the most prominent figure in gravity?',
+          answers: [
+            Answer(answer: 'Isaac Newton', isCorrect: true),
+            Answer(answer: 'Bill Gates', isCorrect: false),
+            Answer(answer: 'Edgar Allan Poe', isCorrect: false),
+            Answer(answer: 'Julius Malema', isCorrect: false),
+          ],
+          category: 'people',
+          imgURL: 'assets/math.png',
+          type: 'radio',
+          hint: 'He lived in the 1600s.'),
+    );
+    questions.add(
+      Question(
+          questionText: 'What is the most famous Pokemon?',
+          answers: [
+            Answer(answer: 'Pikachu', isCorrect: true),
+          ],
+          category: 'characters',
+          imgURL: 'assets/pokemon.jpeg',
+          type: 'text',
+          hint: 'It\'s considered a mouse with red cheeks.'),
+    );
+    questions.add(
+      Question(
+          questionText: 'Who below are related to the field of science?',
+          answers: [
+            Answer(answer: 'Albert Einstein', isCorrect: true),
+            Answer(answer: 'Michio Kaku', isCorrect: true),
+            Answer(answer: 'Elvis Presley', isCorrect: false),
+            Answer(answer: 'Britney Spears', isCorrect: false),
+          ],
+          category: 'people',
+          imgURL: 'assets/science.jpg',
+          type: 'switch',
+          hint: 'Include all fields of science'),
+    );
   }
 
   @override
@@ -101,9 +151,9 @@ class QuestionScreen extends StatelessWidget {
                         questionWidget: const TextQuestionWidget(),
                       ),
                     'switch' => QuestionWidgetContainer(
-                        question: questions[3],
+                        question: element,
                         questionWidget: SwitchQuestionWidgetWrapper(
-                            answers: questions[3].answers),
+                            answers: element.answers),
                       ),
                     String() => const Placeholder(),
                   };
