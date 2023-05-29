@@ -16,39 +16,17 @@ class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        // TODO: use list.generate or .map to generate the radios
-        RadioListTile<String>(
-          title: Text(widget.answers[0].answer),
-          value: widget.answers[0].answer,
-          groupValue: _value,
-          onChanged: (String? value) {
-            setState(() {
-              _value = value;
-            });
-          },
-        ),
-        RadioListTile<String>(
-          title: Text(widget.answers[1].answer),
-          value: widget.answers[1].answer,
-          groupValue: _value,
-          onChanged: (String? value) {
-            setState(() {
-              _value = value;
-            });
-          },
-        ),
-        RadioListTile<String>(
-          title: Text(widget.answers[2].answer),
-          value: widget.answers[2].answer,
-          groupValue: _value,
-          onChanged: (String? value) {
-            setState(() {
-              _value = value;
-            });
-          },
-        ),
-      ],
-    );
+        children: widget.answers.map((element) {
+      return RadioListTile<String>(
+        title: Text(element.answer),
+        value: element.answer,
+        groupValue: _value,
+        onChanged: (String? value) {
+          setState(() {
+            _value = value;
+          });
+        },
+      );
+    }).toList());
   }
 }
