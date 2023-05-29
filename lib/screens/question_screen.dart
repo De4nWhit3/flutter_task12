@@ -124,6 +124,21 @@ class QuestionScreen extends StatelessWidget {
         title: const Text('Questions'),
         backgroundColor: Colors.orange.shade900,
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // TODO: call a function that takes a single item from the questions list
+          // TODO: add that item to the ui
+        },
+        label: const Text(
+          'Add Question',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        icon: const Icon(Icons.plus_one, color: Colors.white),
+        backgroundColor: Colors.orange.shade900,
+        splashColor: Colors.orange.shade400,
+      ),
       backgroundColor: Colors.orange.shade300,
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(
