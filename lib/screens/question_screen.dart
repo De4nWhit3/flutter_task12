@@ -83,38 +83,42 @@ class QuestionScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              // TODO: Loop over questions and generate the correct widget based on question type. eg, radio, date, or text
-              QuestionWidgetContainer(
-                question: questions[0],
-                questionWidget: const DateQuestionWidget(),
+              Column(
+                children: questions.map((element) {
+                  // check the type and return the correct widget
+                  Widget widget = switch (element.type) {
+                    'date' => QuestionWidgetContainer(
+                        question: element,
+                        questionWidget: const DateQuestionWidget(),
+                      ),
+                    'radio' => QuestionWidgetContainer(
+                        question: element,
+                        questionWidget:
+                            RadioQuestionWidget(answers: element.answers),
+                      ),
+                    'text' => QuestionWidgetContainer(
+                        question: element,
+                        questionWidget: const TextQuestionWidget(),
+                      ),
+                    'switch' => QuestionWidgetContainer(
+                        question: questions[3],
+                        questionWidget: SwitchQuestionWidgetWrapper(
+                            answers: questions[3].answers),
+                      ),
+                    String() => const Placeholder(),
+                  };
+
+                  return Column(
+                    children: [
+                      widget,
+                      const SizedBox(
+                        height: 30,
+                      )
+                    ],
+                  );
+                }).toList(),
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              QuestionWidgetContainer(
-                question: questions[1],
-                questionWidget:
-                    RadioQuestionWidget(answers: questions[1].answers),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              QuestionWidgetContainer(
-                question: questions[2],
-                questionWidget: const TextQuestionWidget(),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              QuestionWidgetContainer(
-                question: questions[3],
-                questionWidget:
-                    SwitchQuestionWidgetWrapper(answers: questions[3].answers),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const SubmitButtonWidget(),
+              const SubmitButtonWidget()
             ],
           ),
         ),
