@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_f6/screens/question_screen_fixed.dart';
-
-import 'screens/question_screen.dart';
+import 'package:task_f6/screens/question_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,7 +42,3 @@ class HomePage extends StatelessWidget {
     }
   }
 }
-
-
-// TODO: USE NAMED FOR LOOPS
-// TODO: USE GESTURE DETECTOR

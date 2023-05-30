@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:task_f6/data/answer.dart';
 
+import '../data/answer.dart';
 import '../data/question.dart';
 import '../widgets/date_question_widget.dart';
 import '../widgets/question_widget_container.dart';
 import '../widgets/radio_question_widget.dart';
-import '../widgets/submit_button_widget.dart';
 import '../widgets/switch_question_widget_wrapper.dart';
 import '../widgets/text_question_widget.dart';
 
-class QuestionScreen extends StatelessWidget {
+class GenerateQuestion extends StatefulWidget {
   final List<Question> questions = [];
-  QuestionScreen({
-    super.key,
-  }) {
+  GenerateQuestion({super.key}) {
     questions.add(
       Question(
           questionText: 'On what day is family day?',
@@ -118,17 +115,37 @@ class QuestionScreen extends StatelessWidget {
   }
 
   @override
+  State<GenerateQuestion> createState() => _GenerateQuestionState();
+}
+
+class _GenerateQuestionState extends State<GenerateQuestion> {
+  List<MyDynamicWidget> myWidgets = [];
+  int index = 0;
+
+  addDynamic() {
+    setState(() {});
+    myWidgets.add(MyDynamicWidget(
+      element: widget.questions[index++],
+    ));
+    if (index == widget.questions.length) {
+      index = 0;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget questionBox = Flexible(
+        child: ListView.builder(
+            itemCount: myWidgets.length,
+            itemBuilder: (_, index) => myWidgets[index]));
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Questions'),
         backgroundColor: Colors.orange.shade900,
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // TODO: call a function that takes a single item from the questions list
-          // TODO: add that item to the ui
-        },
+        onPressed: addDynamic,
         label: const Text(
           'Add Question',
           style: TextStyle(
@@ -140,54 +157,62 @@ class QuestionScreen extends StatelessWidget {
         splashColor: Colors.orange.shade400,
       ),
       backgroundColor: Colors.orange.shade300,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          top: 20,
-          bottom: 20,
-        ),
-        child: Center(
-          child: Column(
-            children: [
-              Column(
-                children: questions.map((element) {
-                  // check the type and return the correct widget
-                  Widget widget = switch (element.type) {
-                    'date' => QuestionWidgetContainer(
-                        question: element,
-                        questionWidget: const DateQuestionWidget(),
-                      ),
-                    'radio' => QuestionWidgetContainer(
-                        question: element,
-                        questionWidget:
-                            RadioQuestionWidget(answers: element.answers),
-                      ),
-                    'text' => QuestionWidgetContainer(
-                        question: element,
-                        questionWidget: const TextQuestionWidget(),
-                      ),
-                    'switch' => QuestionWidgetContainer(
-                        question: element,
-                        questionWidget: SwitchQuestionWidgetWrapper(
-                            answers: element.answers),
-                      ),
-                    String() => const Placeholder(),
-                  };
-
-                  return Column(
-                    children: [
-                      widget,
-                      const SizedBox(
-                        height: 30,
-                      )
-                    ],
-                  );
-                }).toList(),
-              ),
-              const SubmitButtonWidget()
-            ],
-          ),
-        ),
+      body: Column(
+        children: [
+          questionBox,
+        ],
       ),
     );
+  }
+}
+
+class MyDynamicWidget extends StatelessWidget {
+  const MyDynamicWidget({super.key, required this.element});
+  final Question element;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget widget = switch (element.type) {
+      'date' => QuestionWidgetContainer(
+          question: element,
+          questionWidget: const DateQuestionWidget(),
+        ),
+      'radio' => QuestionWidgetContainer(
+          question: element,
+          questionWidget: RadioQuestionWidget(answers: element.answers),
+        ),
+      'text' => QuestionWidgetContainer(
+          question: element,
+          questionWidget: const TextQuestionWidget(),
+        ),
+      'switch' => QuestionWidgetContainer(
+          question: element,
+          questionWidget: SwitchQuestionWidgetWrapper(answers: element.answers),
+        ),
+      String() => const Placeholder(),
+    };
+
+    return Column(
+      children: [
+        widget,
+        const SizedBox(
+          height: 30,
+        )
+      ],
+    );
+  }
+}
+
+class MyQuestionPage extends StatefulWidget {
+  const MyQuestionPage({super.key});
+
+  @override
+  State<MyQuestionPage> createState() => _MyQuestionPageState();
+}
+
+class _MyQuestionPageState extends State<MyQuestionPage> {
+  @override
+  Widget build(BuildContext context) {
+    return GenerateQuestion();
   }
 }
