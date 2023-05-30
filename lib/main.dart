@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_f6/screens/question_screen_fixed.dart';
 
 import 'screens/question_screen.dart';
 
@@ -34,12 +35,14 @@ class HomePage extends StatelessWidget {
     const currentScreen = Screens.questionScreen;
     // const currentScreen = Screens.questionScreen;
 
-    switch (currentScreen) {
-      case (Screens.questionScreen):
-        return QuestionScreen();
-      default:
-        return const Placeholder();
-    }
+    return const GenerateQuestion();
+
+    // switch (currentScreen) {
+    //   case (Screens.questionScreen):
+    //     return QuestionScreen();
+    //   default:
+    //     return const Placeholder();
+    // }
   }
 }
 
