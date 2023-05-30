@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
     const currentScreen = Screens.questionScreen;
     // const currentScreen = Screens.questionScreen;
 
-    return const GenerateQuestion();
+    return GenerateQuestion();
 
     // switch (currentScreen) {
     //   case (Screens.questionScreen):
