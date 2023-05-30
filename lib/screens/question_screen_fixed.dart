@@ -141,14 +141,26 @@ class _GenerateQuestionState extends State<GenerateQuestion> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add dynamically'),
+        title: const Text('Questions'),
+        backgroundColor: Colors.orange.shade900,
       ),
-      body: Column(
-        children: [questionBox],
-      ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: addDynamic,
-        child: const Icon(Icons.add),
+        label: const Text(
+          'Add Question',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        icon: const Icon(Icons.plus_one, color: Colors.white),
+        backgroundColor: Colors.orange.shade900,
+        splashColor: Colors.orange.shade400,
+      ),
+      backgroundColor: Colors.orange.shade300,
+      body: Column(
+        children: [
+          questionBox,
+        ],
       ),
     );
   }
